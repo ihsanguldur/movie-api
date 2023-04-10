@@ -1,7 +1,9 @@
+import {logger} from "./utils";
+
 global.env = process.env.env || "development";
 
-//PINO ILE LOGGER EKLE
 import app from "./app";
+
 import Debug from "debug";
 import http from "http";
 const debug = Debug("typescript-express:server");
@@ -12,7 +14,7 @@ app.set("port", port);
 const server = http.createServer(app);
 
 server.listen(port, () => {
-    console.log(`App started on ${env} and listening port ${port}`);
+    logger.info(`App started on ${env} and listening port ${port}`);
 });
 
 server.on("error", onError);
@@ -33,7 +35,7 @@ function normalizePort(val: string): string | number | false {
 }
 
 function onError(error: any): void {
-    console.log("error", error);
+    logger.error("error", error);
     if (error.syscall !== "listen") {
         throw error;
     }
@@ -42,11 +44,11 @@ function onError(error: any): void {
 
     switch (error.code) {
     case "EACCES":
-        console.log(bind + " requires elevated privileges");
+        logger.info(bind + " requires elevated privileges");
         process.exit(1);
         break;
     case "EADDRINUSE":
-        console.log(bind + " is already in use");
+        logger.info(bind + " is already in use");
         process.exit(1);
         break;
     default:

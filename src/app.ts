@@ -1,11 +1,11 @@
 import express, {NextFunction, Request, Response} from "express";
-import logger from "morgan";
+import morgan from "morgan";
 import timeout from "connect-timeout";
 
 const app = express();
 
 app.use(timeout("30sn"));
-app.use(logger("dev"));
+app.use(morgan("dev"));
 
 app.use(express.json());
 
