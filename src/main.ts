@@ -17,7 +17,7 @@ const server = http.createServer(app);
 server.listen(port, () => {
     logger.info(`App started on ${env} and listening port ${port}`);
 
-    swaggerDocs(app, port as string);
+    swaggerDocs(app, port);
 });
 
 server.on("error", onError);
