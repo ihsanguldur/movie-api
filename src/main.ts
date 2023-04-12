@@ -3,6 +3,7 @@ import {logger} from "./utils";
 global.env = process.env.env || "development";
 
 import app from "./app";
+import {swaggerDocs} from "./utils";
 
 import Debug from "debug";
 import http from "http";
@@ -15,6 +16,8 @@ const server = http.createServer(app);
 
 server.listen(port, () => {
     logger.info(`App started on ${env} and listening port ${port}`);
+
+    swaggerDocs(app, port as string);
 });
 
 server.on("error", onError);
