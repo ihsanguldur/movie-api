@@ -14,7 +14,7 @@ module.exports = {
     plugins: ["@typescript-eslint"],
     rules: {
         "no-process-exit": "off",
-        indent: ["error", 4],
+        indent: ["error", 4, {"ignoredNodes": ["PropertyDefinition"]}],
         "prettier/prettier": 0,
         "quotes": ["error", "double"]
     },

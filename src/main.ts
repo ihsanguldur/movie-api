@@ -4,6 +4,7 @@ global.env = process.env.env || "development";
 
 import app from "./app";
 import {swaggerDocs} from "./utils";
+import {AppDataSource} from "./infra";
 
 import Debug from "debug";
 import http from "http";
@@ -14,11 +15,18 @@ app.set("port", port);
 
 const server = http.createServer(app);
 
-server.listen(port, () => {
-    logger.info(`App started on ${env} and listening port ${port}`);
+AppDataSource.initialize()
+    .then(() => {
+        logger.info("DB Connection has been established successfully.");
+        server.listen(port, () => {
+            logger.info(`App started on ${env} and listening port ${port}`);
 
-    swaggerDocs(app, port);
-});
+            swaggerDocs(app, port);
+        });
+    })
+    .catch((e: any) => {
+        logger.error(e);
+    });
 
 server.on("error", onError);
 server.on("listening", onListening);
