@@ -5,8 +5,6 @@ import config from "config";
 
 import * as fs from "fs";
 import path from "path";
-//for migration
-const env = "development";
 
 function getEntities(): any[] {
     const entities: any[] = [];
@@ -49,12 +47,12 @@ function getMigrations(): any[] {
 }
 
 const AppDataSource = new DataSource({
-    type: config.get<"postgres">(`${env}.dialect`),
-    host: config.get<string>(`${env}.host`),
-    port: config.get<number>(`${env}.port`),
-    username: config.get<string>(`${env}.username`),
-    password: config.get<string>(`${env}.password`),
-    database: config.get<string>(`${env}.database`),
+    type: config.get<"postgres">("database.dialect"),
+    host: config.get<string>("database.host"),
+    port: config.get<number>("database.port"),
+    username: config.get<string>("database.username"),
+    password: config.get<string>("database.password"),
+    database: config.get<string>("database.database"),
     logging: env === "development",
     entities: getEntities(),
     migrations: getMigrations(),

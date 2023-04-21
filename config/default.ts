@@ -1,10 +1,6 @@
 export default {
-    development: {
-        username: "postgres",
-        password: "1234567",
-        database: "movies",
-        host: "localhost",
-        dialect: "postgres",
-        port: 5432
+    movieDB: {
+        APIKey: "26f51d6deba3563e2aa824eb60126272",
+        APIUrl: "https://api.themoviedb.org/3"
     }
 }
