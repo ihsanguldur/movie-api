@@ -1,10 +1,10 @@
 import {logger} from "./utils";
 
-global.env = process.env.env || "development";
+global.env = process.env.NODE_ENV || "development";
 
 import app from "./app";
 import {swaggerDocs} from "./utils";
-import {AppDataSource} from "./infra";
+import {AppDataSource} from "./infra/database";
 
 import Debug from "debug";
 import http from "http";
